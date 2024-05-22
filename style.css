@@ -23,3 +23,21 @@ h3{
     text-align: justify;
     
 }
+
+
+.car {
+    display: inline-block;
+    position: relative;
+    background-color: orange;
+  }
+.car::after {
+    position: absolute;
+    top: 2px;
+    right: .5em;
+    transition: all .05s ease-in-out;
+}
+
+.car:hover::after,
+.car:focus-within::after {
+  right: 1.5em;
+}

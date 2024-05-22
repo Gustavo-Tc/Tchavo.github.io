@@ -19,7 +19,7 @@ function Start(){
 }
 
 function debug(element){
-    console.log(element.text);
+    console.log(element.className);
 }
 
 function angleToText(_angle){
