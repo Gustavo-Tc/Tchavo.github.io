@@ -56,21 +56,21 @@ function GetAngleFront(_className){
     return new Angle(inputDegrees, inputMinutes, inputSeconds);
 }
 
-
 function Start(){
     Execute();
 }
 
-
-
-
 function Execute(){
     console.log(document.title + " has loaded")
+    Reseta(0);
+    Reseta(1);
+    Reseta(2);
 
     let _Angulos = new Array(GetAngleFront("horizontal1"), GetAngleFront("horizontal2"), GetAngleFront("horizontal3"));
-    //let _Angulos = new Array(new Angle(285,56,3), new Angle(316,20,35), new Angle(297,44,7));
+
     //_Angulos.forEach(function (element){ console.log(element); })
     let _Norte = GetAngleFront("norte");
+    //console.log(_Norte);
 
     let _Vertices = 3;
 
@@ -99,7 +99,9 @@ function Execute(){
 
     if(Math.abs(_ErroAngular.AngleInt) > _TolerânciaAngular.AngleInt){
         SetFront("testedeerroangular", new Array("Desaprovado! ultrapassou limite de erro! ", "Erro angular : " + angleToText(toAngle(Math.abs(_ErroAngular.AngleInt))), " o Erro Máximo Permitido : " + angleToText(_TolerânciaAngular)));
-        console.log("Desaprovado! ultrapassou limite de erro!"); return;
+        console.log("Medição reprovada, nova consulta de campo necessária! O limite de erro foi ultrapassado!"); 
+        DeuErrado(1);
+        DeuErrado(2);
     }
     else{ 
         SetFront("testedeerroangular", new Array("Passou no teste do limite de erro, continuando operações"));
@@ -145,7 +147,8 @@ function Execute(){
         console.log("Passou no teste do perímetro, pode prosseguir com os cálculos");
     }else{
         SetFront("testeerrolinear", new Array("Reprovado nos testes! é necessário um novo levantamento em campo!"));
-        console.log("Reprovado nos testes! é necessário um novo levantamento em campo!"); return;
+        console.log("Reprovado nos testes de erro linear! é necessário um novo levantamento em campo!"); 
+        DeuErrado(2);
     }
     
     let _PositionsCorrected = CorrigirProjeções(_ProjeçõesRelativas, _Distances, _Perímetro);
@@ -168,6 +171,19 @@ function Execute(){
 
 }
 
+function Reseta(_fase){
+    var col = document.getElementById("Fase" + _fase).children;
+    for(let i = 0; i < col.length; i++){
+        col[i].style.color = "black";
+    }
+}
+
+function DeuErrado(_fase){
+    var col = document.getElementById("Fase" + _fase).children;
+    for(let i = 0; i < col.length; i++){
+        col[i].style.color = "red";
+    }
+}
 
 function sum(...valores){
     let resultado = 0;
