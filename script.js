@@ -97,8 +97,8 @@ function Execute(){
 
     //console.log(_TolerânciaAngular);
 
-    if(_ErroAngular.AngleInt >= _TolerânciaAngular.AngleInt){
-        SetFront("testedeerroangular", new Array("Desaprovado! ultrapassou limite de erro!"));
+    if(Math.abs(_ErroAngular.AngleInt) > _TolerânciaAngular.AngleInt){
+        SetFront("testedeerroangular", new Array("Desaprovado! ultrapassou limite de erro! ", "Erro angular : " + angleToText(toAngle(Math.abs(_ErroAngular.AngleInt))), " o Erro Máximo Permitido : " + angleToText(_TolerânciaAngular)));
         console.log("Desaprovado! ultrapassou limite de erro!"); return;
     }
     else{ 
