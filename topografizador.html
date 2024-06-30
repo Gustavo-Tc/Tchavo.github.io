@@ -6,33 +6,103 @@
 </head>
 
 <body>
-    <h1>Poligonator</h1>
-
-    <div id = "_SA">
-
-
-        <div class = "ListInput">
-            <p >Ponto 1</p>
-            <div>
-                <input class= "ms" type="number" placeholder="Graus">
-            </div>
-        </div>
-
-        <details class="_VERTICE">
-            <summary onload = debug(this)>
-              Vertices
-            </summary>
-            
-          </details>
-
-        <H2>Somatório Angular</H2>
-        <p id = "_SA_Text">Angulos externos <br>
-            Σae = 180° * (n + 2) <br>
-            Angulos internos <br>
-            Σai = 180° *  (n - 2) <br>
-        </p>
+<img src="Images/Topografizador.gif" width="742" height="76" alt=""/>
+<p>&nbsp;</p>
+<img src="Images/Poligonator.gif" width="396" height="45" alt=""/> 
+<button id="botão" onclick="Execute()"> Executar </button>
+<script src="script.js"></script>
+<div id = "_SA">
+<details class="Ponto1">
+  <div class = "ListInput">
+    <div>
+      <label for="number18">Graus:</label>
+      <input name="number5" type="number" class="horizontal1graus" value="285">
+      <label for="number19">Minutos:</label>
+      <input name="number5" type="number" class="horizontal1minutos" value="56">
+      <label for="number20">Segundos:</label>
+      <input name="number5" type="number" class="horizontal1segundos" value="3">
     </div>
-
-    <script src="script.js"></script>
+    <label for="number24">Azimute(Norte) do primeiro ponto:&nbsp;&nbsp;</label>
+    <div>
+      <label for="number21">Graus:</label>
+      <input name="number5" type="number" class="nortegraus" value="94">
+      <label for="number22">Minutos:</label>
+      <input name="number5" type="number" class="norteminutos" value="53">
+      <label for="number23">Segundos:</label>
+      <input name="number5" type="number" class="nortesegundos" value="17">
+  </div>
+  </div>
+  
+  <label for="number19">Distância ao próximo ponto:</label>
+  <input name="number5" type="number" class="distancia1" value="29.85398235">
+  
+  <summary onLoad="debug(this)">
+  &nbsp;Ponto 1</summary>
+</details>
+  <details class="Ponto2">
+    <div class = "ListInput">
+<div>
+        <label for="number10">Graus:</label>
+        <input name="number4" type="number" class="horizontal2graus" value="316">
+        <label for="number11">Minutos:</label>
+        <input name="number4" type="number" class="horizontal2minutos" value="20">
+        <label for="number12">Segundos:</label>
+        <input name="number4" type="number" class="horizontal2segundos" value="35">
+      </div>
+    </div>
+    
+    <label for="number16">Distância ao próximo ponto:</label>
+    <input name="number5" type="number" class="distancia2" value="15.99803481">
+    
+<summary onLoad="debug(this)">&nbsp;Ponto 2</summary>
+  </details>
+  <details class="Ponto3">
+    <div class = "ListInput">
+<div>
+        <label for="number13">Graus:</label>
+        <input name="number4" type="number" class="horizontal3graus" value="297">
+        <label for="number14">Minutos:</label>
+        <input name="number4" type="number" class="horizontal3minutos" value="44">
+        <label for="number15">Segundos:</label>
+        <input name="number4" type="number" class="horizontal3segundos" value="7">
+      </div>
+    </div>
+    
+    <label for="number17">Distância ao próximo ponto:</label>
+    <input name="number5" type="number" class="distancia3" value="52.45689655">
+    
+<summary onLoad="debug(this)">&nbsp;Ponto 3</summary>
+  </details>
+      <div>
+        <h3>Dados obtidos pelo cálculo:</h3>
+        <div>
+          <h4 id="somatorioangular">Somatório Angular:&nbsp;</h4>
+          <h4 id="somatorioangulardevido">Somatório Angular Devido:&nbsp;</h4>
+          <h4 id="erroangularcometido">Erro Angular Cometido:&nbsp;</h4>
+          <h4 id="erroangularmaximopermitido">Erro Angular Máximo Permitido:&nbsp;</h4>
+          <h4 id="testedeerroangular">Passou no test de erro angular?:&nbsp;</h4>
+          <h4 id="correçaonecessaria">Correção Necessária:&nbsp;</h4>
+          <h4 id="anguloscorrigidos">Ângulos Corrigidos:&nbsp;</h4>
+          <h4 id="azimutesdospontos">Azimutes Dos Pontos:&nbsp;</h4>
+          <h4 id="projeçoesrelativas">Projeções Relativas  Dos Pontos:&nbsp;</h4>
+          <h4 id="errolineartotal">Erro Linear Total:&nbsp;</h4>
+          <h4 id="errolinearmaximo">Erro Linear Máximo Permitido:&nbsp;</h4>
+          <h4 id="testeerrolinear">Passou no teste do erro Linear?:&nbsp;</h4>
+          <h4 id="projeçoescorrigidas">Projeções Corrigidas Dos Pontos:&nbsp;</h4>
+          <h4 id="coordenadastotais">Coordenadas Totais Dos Pontos:&nbsp;</h4>
+          <h4 id="azimutescorrigidos">Azimutes Corrigidos Dos Pontos:&nbsp;</h4>
+          <h4 id="ladoscorrigidos">Lados Corrigidos Do Poligono:&nbsp; &nbsp;</h4>
+        </div>
+<p>&nbsp;</p>
+&nbsp;</div>
+      <h1>Fórmulas base</h1>
+      <h2>Somatório Angular</h2>
+      <p id = "_SA_Text">Angulos externos <br>
+        Σae = 180° * (n + 2) <br>
+        Angulos internos <br>
+        Σai = 180° *  (n - 2) <br>
+      </p>
+    </div>
+<img src="Images/Tchavo (1).gif" width="438" height="85" alt=""/>
 </body>
 </html>

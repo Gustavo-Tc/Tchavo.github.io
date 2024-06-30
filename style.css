@@ -37,7 +37,41 @@ h3{
     transition: all .05s ease-in-out;
 }
 
+
 .car:hover::after,
 .car:focus-within::after {
   right: 1.5em;
+}.Angulos {
+}
+.angulos {
+}
+.angulo1 {
+}
+.angulo1.graus {
+}
+.horizontal.min {
+}
+.horizontal.graus {
+}
+.horizontal.seg {
+}
+.horizontal1graus {
+}
+.horizontal2graus {
+}
+.horizontal2minutos {
+}
+.horizontal3graus {
+}
+.horizontal3minutos {
+}
+.horizontal3segundos {
+}
+.horizontal2segundos {
+}
+.a {
+}
+#botão {
+	color: white;
+	background-color: crimson;
 }
