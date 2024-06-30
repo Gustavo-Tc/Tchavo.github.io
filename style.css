@@ -75,3 +75,34 @@ h3{
 	color: white;
 	background-color: crimson;
 }
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+  
+input[type="number"] {
+    -moz-appearance: textfield !important;
+}
+
+.metters{
+	width: 90%;
+	font-size: 90%;
+	color: black;
+	background-color: aliceblue;
+	border: 0;
+}
+
+.degrees {
+	font-size: 90%;
+	width: 50px;
+	color: black;
+	background-color: aliceblue;
+	border: 0;
+}
+
+.EXECUTE {
+	width: 120px;
+	height: 40px;
+	font-size: 25px;
+}
