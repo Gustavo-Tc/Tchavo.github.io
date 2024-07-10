@@ -19,6 +19,10 @@ class Angle
     get AngleInt(){
         return this.angle + (this.minutes/60) + (this.seconds / 3600);
     }
+
+    get Radians(){
+        return (this.angle + (this.minutes/60) + (this.seconds / 3600)) * (Math.PI/180);
+    }
     
 }
 
@@ -32,7 +36,6 @@ class Vector extends Array {
 
 function GetFront(_className){
     let bake = document.getElementsByClassName(_className)[0];
-
     return Number(bake.value);
 }
 
@@ -46,6 +49,11 @@ function SetFront(_className, _strings){
 
     bake.innerHTML = result;
 
+}
+
+function SetFrontValue(_className, _value){
+    let bake = document.getElementsByClassName(_className)[0];
+    bake.value = _value;
 }
 
 function GetAngleFront(_className){
@@ -67,15 +75,36 @@ function Execute(){
     Reseta(2);
 
     let _Angulos = new Array(GetAngleFront("horizontal1"), GetAngleFront("horizontal2"), GetAngleFront("horizontal3"));
-
+    //let _Angulos = new Array(
+    //    new Angle(317,22,50), 
+    //    new Angle(276,28,14), 
+    //    new Angle(306,9,2)
+    //);
+    
     //_Angulos.forEach(function (element){ console.log(element); })
-    let _Norte = GetAngleFront("norte");
+    //let _Norte = GetAngleFront("norte");
+    let _Norte = new Angle(255,20,7);
     //console.log(_Norte);
 
     let _Vertices = 3;
 
-    let _Distances = new Array(GetFront("distancia1"), GetFront("distancia2"), GetFront("distancia3"));
+    let _Distance1 = calcDistance(GetFront("fiosuperior1"), GetFront("fioinferior1"), GetAngleFront("vertical1"), GetFront("coeficiente"));
+    let _Distance2 = calcDistance(GetFront("fiosuperior2"), GetFront("fioinferior2"), GetAngleFront("vertical2"), GetFront("coeficiente"));
+    let _Distance3 = calcDistance(GetFront("fiosuperior3"), GetFront("fioinferior3"), GetAngleFront("vertical3"), GetFront("coeficiente"));
+    
+    SetFrontValue("distancia1 metters", _Distance1);
+    SetFrontValue("distancia2 metters", _Distance2);
+    SetFrontValue("distancia3 metters", _Distance3);
+    
 
+    SetFront("resdistancia1", new Array("Distância 1: " + _Distance1));
+    SetFront("resdistancia2", new Array("Distância 2: " + _Distance2));
+    SetFront("resdistancia3", new Array("Distância 3: " + _Distance3));
+
+    //let _Distances = new Array(GetFront("distancia1"), GetFront("distancia2"), GetFront("distancia3"));
+    _Distances = new Array(_Distance1, _Distance2, _Distance3);
+    //_Distances.forEach(function (element){ console.log(element); })
+    
     let _Perímetro = 0; _Distances.forEach(element => {  _Perímetro += element;  });
     //console.log(_Perímetro);
 
@@ -92,7 +121,7 @@ function Execute(){
 
     //console.log(_ErroAngular);
 
-    let _TolerânciaAngular = TolerânciaAngular(30, _Vertices);
+    let _TolerânciaAngular = TolerânciaAngular(10, _Vertices);
     SetFront("erroangularmaximopermitido", new Array("Erro Angular Máximo Permitido:", angleToText(_TolerânciaAngular)));
 
     //console.log(_TolerânciaAngular);
@@ -116,14 +145,14 @@ function Execute(){
     //console.log(_Angulos[0]);
 
     let _AngulosCorrigidos = CorreçãoDosAngulos(_Angulos, _CorreçãoPorVértice);
-    SetFront("anguloscorrigidos", new Array("Angulos Corrigidos:", "Ângulo 1 : " + angleToText(_AngulosCorrigidos[0]), "   Ângulo 2 : " + angleToText(_AngulosCorrigidos[1]), "   Ângulo 3 : " + angleToText(_AngulosCorrigidos[2])));
-
+    SetFront("anguloscorrigidos", new Array("Angulos Corrigidos:", "Ângulo 1 : " + angleToText(_AngulosCorrigidos[2]), "   Ângulo 2 : " + angleToText(_AngulosCorrigidos[0]), "   Ângulo 3 : " + angleToText(_AngulosCorrigidos[1])));
+    //_AngulosCorrigidos.forEach(function (element){ console.log(element); })
     //console.log(_AngulosCorrigidos[0]);
 
 
     let _Azimutes = CalculoAzimutes(_Norte, _AngulosCorrigidos);
     SetFront("azimutesdospontos", new Array("Azimutes Dos Pontos: ", " Azimute 1: " + angleToText(_Azimutes[0]), "|| Azimute 2: " + angleToText(_Azimutes[1]), "|| Azimute 3: " + angleToText(_Azimutes[2])));
-    //Azimutes.forEach(function (element){ console.log(element); })
+    //_Azimutes.forEach(function (element){ console.log(element); })
 
     let _ProjeçõesRelativas = ProjeçõesRelativas(_Azimutes, _Distances);
     SetFront("projeçoesrelativas", new Array("Projeções Relativas Dos Pontos: ", " Ponto 1: " + rounded(_ProjeçõesRelativas[0]), "|| Ponto 2: " + rounded(_ProjeçõesRelativas[1]), "|| Ponto 3: " + rounded(_ProjeçõesRelativas[2])));
@@ -195,6 +224,11 @@ function sum(...valores){
     return toAngle(resultado);
 }
 
+function calcDistance(fioSuperior, fioInferior, zenital, coeficiente){
+    //console.log(zenital.Radians);
+    return (fioSuperior - fioInferior) * coeficiente * (Math.sin(zenital.Radians))**2;
+}
+
 function SomatórioAngularInternos(_n){
     return new Angle(180 * (_n - 2),0,0)
 }
@@ -230,7 +264,7 @@ function CorreçãoDosAngulos(_Angulos, _Correção){
     let result = [_Angulos.length];
     for(let i = 0; i < _Angulos.length; i++){
         
-        result[i] = sum(_Angulos[i], _Correção);
+        result[i] = toAngle( _Angulos[i].AngleInt + _Correção.AngleInt );
     }
 
     return result;
@@ -245,23 +279,22 @@ function CalculoAzimutes(_AzimuteNorte, _Angulos){
 
     for(let i = 1; i < _Angulos.length; i++){
         //console.log(result[i - 1]);        console.log( " + ");  console.log(_Angulos[i]);
-        result[i] = sum(result[i - 1], _Angulos[i]);
-        //console.log(result[i]);
-
+        result[i] =  toAngle(result[i - 1].AngleInt + _Angulos[i - 1].AngleInt);
+        
         if(result[i].AngleInt < 180){ result[i] = toAngle(result[i].AngleInt + 180);}
         else if(result[i].AngleInt >= 540){  result[i] = toAngle(result[i].AngleInt - 540); }
         else if(result[i].AngleInt >= 180 && result[i].AngleInt < 540){ result[i] = toAngle(result[i].AngleInt - 180);}
+        // console.log(result[i - 1]); console.log(" + ");        console.log(_Angulos[i - 1]);        console.log(" = ");        console.log(result[i]);
         
     }
 
-    result[0] = toAngle(_Angulos[0].AngleInt + result[result.length - 1].AngleInt);
+    result[0] = toAngle(_Angulos[result.length - 1].AngleInt + result[result.length - 1].AngleInt);
 
     if(result[0].AngleInt < 180){ result[0] = toAngle(result[0].AngleInt + 180);}
     else if(result[0].AngleInt >= 540){  result[0] = toAngle(result[0].AngleInt - 540); }
     else if(result[0].AngleInt >= 180 && result[0].AngleInt < 540){ result[0] = toAngle(result[0].AngleInt - 180);}
     
-
-   //console.log(result[0]);
+    //console.log(result[0]);
 
     return result;
 }
@@ -412,8 +445,13 @@ function toAngle(_value){
 
     result.seconds = Math.round( 60 * (result.minutes - Math.trunc(result.minutes)) * 10000  ) / 10000;
     //result.seconds = 60 * (result.minutes - Math.trunc(result.minutes));
+
     result.minutes = (Math.trunc(result.minutes));
 
+    if(result.seconds == 60){
+        result.seconds -= 60;
+        result.minutes += 1;
+    }
     return result;
 }
 

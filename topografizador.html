@@ -29,7 +29,7 @@
   (Da ré até a vante no sentido horário)&nbsp;</th>
       <th align="center" scope="col">Distância medida</th>
       <th scope="col"><p>Fio Superior</p></th>
-      <th scope="col">Fio Médio</th>
+      <th scope="col">Ângulo vertical(Zênite)</th>
       <th scope="col"><p>Fio Inferior</p></th>
     </tr>
     <tr>
@@ -45,9 +45,16 @@
           <input name="number3" type="number" class="nortesegundos degrees" value="17">
         </div></td>
       <td align="center"><input name="number2" type="number" class="distancia1 metters" value="29.85398235"></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td><input name="number" type="number" class="fiosuperior1 metters" value="0.590"></td>
+      <td><span class="NortePrimeiroPonto">
+        <label for="number2">Graus:</label>
+        <input name="number9" type="number" class="vertical1graus degrees" value="90">
+        <label for="number13">Minutos:</label>
+        <input name="number9" type="number" class="vertical1minutos degrees" value="2">
+        <label for="number14">Segundos:</label>
+        <input name="number9" type="number" class="vertical1segundos degrees" value="55">
+      </span></td>
+      <td><input name="number4" type="number" class="fioinferior1 metters" value="0.290"></td>
     </tr>
     <tr>
       <td width="15" align="center" valign="middle">2</td>
@@ -62,9 +69,16 @@
         <input name="number3" type="number" class="horizontal2segundos degrees" value="35">
       </div></td>
       <td align="center"><input name="number2" type="number" class="distancia2 metters" value="15.99803481">&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td><input name="number5" type="number" class="fiosuperior2 metters" value="0.500"></td>
+      <td><span class="NortePrimeiroPonto">
+        <label for="number15">Graus:</label>
+        <input name="number10" type="number" class="vertical2graus degrees" value="89">
+        <label for="number16">Minutos:</label>
+        <input name="number10" type="number" class="vertical2minutos degrees" value="56">
+        <label for="number17">Segundos:</label>
+        <input name="number10" type="number" class="vertical2segundos degrees" value="34">
+      </span></td>
+      <td><input name="number7" type="number" class="fioinferior2 metters" value="0.256"></td>
     </tr>
     <tr>
       <td width="15" align="center" valign="middle">3</td>
@@ -79,9 +93,16 @@
         <input name="number3" type="number" class="horizontal3segundos degrees" value="7">
       </div></td>
       <td align="center"><input name="number2" type="number" class="distancia3 metters" value="52.45689655"></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td><input name="number6" type="number" class="fiosuperior3 metters" value="0.740"></td>
+      <td><span class="NortePrimeiroPonto">
+        <label for="number18">Graus:</label>
+        <input name="number11" type="number" class="vertical3graus degrees" value="94">
+        <label for="number19">Minutos:</label>
+        <input name="number11" type="number" class="vertical3minutos degrees" value="6">
+        <label for="number20">Segundos:</label>
+        <input name="number11" type="number" class="vertical3segundos degrees" value="28">
+      </span></td>
+      <td><input name="number8" type="number" class="fioinferior3 metters" value="0.534"></td>
     </tr>
     <tr>
       <td width="15" align="center" valign="middle">1</td>
@@ -98,7 +119,7 @@
             </td>
       <td align="center">&nbsp;</td>
       <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>K:        <input name="number12" type="number" class="coeficiente metters" value="100"></td>
       <td>&nbsp;</td>
     </tr>
   </tbody>
@@ -110,6 +131,9 @@
     <h3>Dados obtidos pelo cálculo:</h3>
         <div>
 <div id="Fase0">
+		<h4 id="resdistancia1">Distância 1:&nbsp;</h4>
+		<h4 id="resdistancia2">Distância 2:&nbsp;</h4>
+		<h4 id="resdistancia3">Distância 3:&nbsp;</h4>
         <h4 id="somatorioangular">Somatório Angular:&nbsp;</h4>
             <h4 id="somatorioangulardevido">Somatório Angular Devido:&nbsp;</h4>
             <h4 id="erroangularcometido">Erro Angular Cometido:&nbsp;</h4>
